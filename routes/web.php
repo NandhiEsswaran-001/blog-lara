@@ -9,6 +9,9 @@ Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 Route::post('/register', [UserController::class, "register"])->middleware('guest');
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
 Route::post('/logout', [UserController::class, "logout"])->middleware('mustBeLoggedIn');
+Route::get('/admin-only', function() {
+    return "Only Admins can view this page";
+})->middleware('can:visitAdminPage');
 
 // Post Related Routes
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('mustBeLoggedIn');
